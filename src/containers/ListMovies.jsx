@@ -14,11 +14,7 @@ const ListMovies = () => {
     const fetchDataMovies = async () => {
       try {
         // Gunakan instance tmdb di sini
-        const responseDariTMDB = await tmdb.get(
-          // Nah di sini kita tidak perlu menuliskan terlalu panjang lagi
-          "/movie/popular"
-        );
-
+        const responseDariTMDB = await tmdb.get("/movie/popular");
         // Jangan lupa set statenya
         // Perhatikan di sini responseDariTMDB ada .data (response schema axios)
         setMovies(responseDariTMDB.data.results);
@@ -31,13 +27,13 @@ const ListMovies = () => {
   }, []);
 
   return (
-    <Box className="boxy">
-      <Typography variant="h5">Daftar Film Populer</Typography>
-
-      {movies.map((movie) => {
-        return <CardMovie key={movie.id} propsMovie={movie} />;
-      })}
-    </Box>
+    <div className="bg-gray">
+      <Box sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
+        {movies.map((movie) => {
+          return <CardMovie key={movie.id} propsMovie={movie} />;
+        })}
+      </Box>
+    </div>
   );
 };
 

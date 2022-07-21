@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, googleSignIn, loginDenganEmailDanPassword, registerDenganEmailDanPassword, resetPassword } from "../authentication/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleButton } from "react-google-button";
+import Footer from "./Footer";
 
 const LoginOrRegisterForm = ({ loginOrRegister }) => {
   const navigate = useNavigate();
@@ -72,45 +73,48 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
   }, [loading, user, navigate]);
 
   return (
-    <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: "95vh" }}>
-      <Box className={styles.boxy} component="form" noValidate>
-        <Typography variant="body1">{loginOrRegister === "login" ? "Login Page" : "Register Page"}</Typography>
+    <div style={{ backgroundImage: "conic-gradient(at left top, rgb(14, 165, 233), rgb(254, 215, 170), rgb(202, 138, 4))", height: "100vh" }}>
+      <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={{ minHeight: "95vh" }}>
+        <Box className={styles.boxy} component="form" noValidate>
+          <Typography variant="body1">{loginOrRegister === "login" ? "Login Page" : "Register Page"}</Typography>
 
-        <TextField label="Email" type="email" variant="outlined" size="small" value={credential.email} onChange={textFieldEmailOnChangeHandler} />
+          <TextField label="Email" type="email" variant="outlined" size="small" value={credential.email} onChange={textFieldEmailOnChangeHandler} />
 
-        <TextField label="password" type="Password" variant="outlined" size="small" value={credential.password} onChange={textFieldPasswordOnChangeHandler} />
+          <TextField label="password" type="Password" variant="outlined" size="small" value={credential.password} onChange={textFieldPasswordOnChangeHandler} />
 
-        {loading ? (
-          <Typography variant="caption" display="block">
-            Initializing...
-          </Typography>
-        ) : null}
-        <Button variant="outlined" size="small" onClick={buttonLoginOrRegisterOnClickHandler}>
-          {loginOrRegister === "login" ? "Login" : "Register Account"}
-        </Button>
-
-        {loginOrRegister === "login" ? (
-          <Button variant="outlined" size="small" onClick={buttonResetPasswordHandler}>
-            Reset Password
+          {loading ? (
+            <Typography variant="caption" display="block">
+              Initializing...
+            </Typography>
+          ) : null}
+          <Button variant="outlined" size="small" onClick={buttonLoginOrRegisterOnClickHandler}>
+            {loginOrRegister === "login" ? "Login" : "Register Account"}
           </Button>
-        ) : null}
 
-        <Typography varian="body1" textAlign={"center"}>
-          Or
-        </Typography>
+          {loginOrRegister === "login" ? (
+            <Button variant="outlined" size="small" onClick={buttonResetPasswordHandler}>
+              Reset Password
+            </Button>
+          ) : null}
 
-        <GoogleButton onClick={handleGoogleSignIn} />
-        {loginOrRegister === "login" ? (
-          <Link to="/register">
-            <Typography variant="body1">or do you want Register ?</Typography>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <Typography variant="body1">or do you want Login ?</Typography>
-          </Link>
-        )}
-      </Box>
-    </Grid>
+          <Typography varian="body1" textAlign={"center"}>
+            Or
+          </Typography>
+
+          <GoogleButton onClick={handleGoogleSignIn} />
+          {loginOrRegister === "login" ? (
+            <Link to="/register">
+              <Typography variant="body1">or do you want Register ?</Typography>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <Typography variant="body1">or do you want Login ?</Typography>
+            </Link>
+          )}
+        </Box>
+      </Grid>
+      <Footer />
+    </div>
   );
 };
 

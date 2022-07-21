@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <Box className={styles.grow}>
-      <AppBar position="static">
+      <AppBar sx={{ background: "rgba(76,76,76,0.32)" }} position="static">
         <Toolbar>
           <Typography variant="h6" component="div" className={styles.grow}>
             Movie List App
